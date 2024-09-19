@@ -8,5 +8,9 @@ namespace LinkDev.IKEA.DAL.persistance.Data
 {
     internal class ApplicationDbContextSeed
     {
+        public static void Seed (ApplicationDbContext db)
+        {
+
+        }
     }
 }

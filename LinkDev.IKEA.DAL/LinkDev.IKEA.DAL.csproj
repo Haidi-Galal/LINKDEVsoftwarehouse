@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="persistance\Data\configurations\" />
+    <Folder Include="persistance\Data\Migrations\" />
+    <Folder Include="persistance\Data\DataSeeding\" />
+    <Folder Include="persistance\Repoistories\" />
+  </ItemGroup>
+
 </Project>
