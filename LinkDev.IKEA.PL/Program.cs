@@ -7,8 +7,10 @@ namespace LinkDev.IKEA.PL
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            #region register services 
             builder.Services.AddControllersWithViews();
 
+            #endregion
             var app = builder.Build();
             
 
