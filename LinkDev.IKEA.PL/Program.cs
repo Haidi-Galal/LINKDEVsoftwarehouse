@@ -1,3 +1,6 @@
+using LinkDev.IKEA.DAL.persistance.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace LinkDev.IKEA.PL
 {
     public class Program
@@ -7,8 +10,32 @@ namespace LinkDev.IKEA.PL
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            #region register services 
             builder.Services.AddControllersWithViews();
+            // builder.Services.AddScoped<ApplicationDbContext>();
+            //builder.Services.AddScoped<DbContextOptions<ApplicationDbContext>>();
+            //builder.Services.AddScoped<DbContextOptions<ApplicationDbContext>>
+            //    (
+            //     (serviceProvider) =>
+            //     {
+            //         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            //         optionsBuilder.UseSqlServer("");
+            //        var options= optionsBuilder.Options;
+            //         return options;
+            //     }
+            //    );
 
+            builder.Services.AddDbContext<ApplicationDbContext>
+                (
+                options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+
+                );
+            
+
+
+
+
+            #endregion
             var app = builder.Build();
             
 
