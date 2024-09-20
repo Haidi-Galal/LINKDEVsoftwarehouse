@@ -1,5 +1,6 @@
 ﻿using LinkDev.IKEA.DAL.Entities.Department;
 using LinkDev.IKEA.DAL.persistance.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,10 @@ namespace LinkDev.IKEA.DAL.persistance.Repoistories
         public IEnumerable<Department> GetAll()
         {
             return _dbContext.Departments.ToList();
+        }
+        public IQueryable<Department> GetAllDepartments( )
+        {
+            return _dbContext.Departments;
         }
         public Department? GetDepartmentById(int id)
         {
@@ -41,8 +46,6 @@ namespace LinkDev.IKEA.DAL.persistance.Repoistories
             return _dbContext.SaveChanges();
         }
 
-     
-
-       
+        
     }
 }
