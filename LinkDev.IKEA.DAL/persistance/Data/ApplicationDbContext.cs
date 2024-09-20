@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.persistance.Data
 {
-    internal class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:DbContext
     {
-        public ApplicationDbContext():base()
+        public ApplicationDbContext(DbContextOptions <ApplicationDbContext> options) :base(options)
         {
             
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-5L3JKJC\\MSSQLSERVER01;Database=MyDatabase;Trusted_Connection=True;TrustServerCertificate=True;");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=DESKTOP-5L3JKJC\\MSSQLSERVER01;Database=MyDatabase;Trusted_Connection=True;TrustServerCertificate=True;");
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         {
