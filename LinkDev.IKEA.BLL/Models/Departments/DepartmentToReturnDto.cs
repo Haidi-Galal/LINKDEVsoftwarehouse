@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.BLL.Models.Departments
 {
-    internal class DepartmentToReturnDto
+    public class DepartmentToReturnDto
     {
+        public string Name { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public int Code { get; set; }
+        public  DateTime CreationDate { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using LinkDev.IKEA.DAL.Entities.Department;
 
 namespace LinkDev.IKEA.BLL.Services.Departments
 {
-    internal class DepartmentService : IDepartmentService
+    public class DepartmentService : IDepartmentService
     {
         private readonly IDepartmentRepoistory _departmentRepoistory;
         public DepartmentService(IDepartmentRepoistory departmentRepoistory)
