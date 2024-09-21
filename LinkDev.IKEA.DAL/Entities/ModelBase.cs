@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.Entities
 {
-    internal class ModelBase
+    public class ModelBase
     {
         public int Id { get; set; }
         public bool IsDeleted { get; set; }

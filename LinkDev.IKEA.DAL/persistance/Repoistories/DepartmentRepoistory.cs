@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.persistance.Repoistories
 {
-    internal class DepartmentRepoistory : IDepartmentRepoistory
+    public class DepartmentRepoistory : IDepartmentRepoistory
     {
         private readonly ApplicationDbContext _dbContext;
         public DepartmentRepoistory(ApplicationDbContext dbContext)
@@ -18,31 +18,31 @@ namespace LinkDev.IKEA.DAL.persistance.Repoistories
         }
         public IEnumerable<Department> GetAll()
         {
-            return _dbContext.Departments.ToList();
+            return _dbContext.Department.ToList();
         }
         public IQueryable<Department> GetAllDepartments( )
         {
-            return _dbContext.Departments;
+            return _dbContext.Department;
         }
         public Department? GetDepartmentById(int id)
         {
-           return _dbContext.Departments.Find(id);
+           return _dbContext.Department.Find(id);
         }
         public int AddDepartment(Department entity)
         {
-            _dbContext.Departments.Add(entity);
+            _dbContext.Department.Add(entity);
             return _dbContext.SaveChanges();
         }
 
         public int UpdateDepartment(Department entity)
         {
-            _dbContext.Departments.Update(entity);
+            _dbContext.Department.Update(entity);
             return _dbContext.SaveChanges();
         }
 
         public int DeleteDepartment(Department entity)
         {
-            _dbContext.Departments.Update(entity);
+            _dbContext.Department.Update(entity);
             return _dbContext.SaveChanges();
         }
 

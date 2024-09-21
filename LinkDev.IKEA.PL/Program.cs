@@ -34,7 +34,7 @@ namespace LinkDev.IKEA.PL
                 );
 
               builder.Services.AddScoped<IDepartmentRepoistory, DepartmentRepoistory>();
-              builder.Services.AddScoped<IDepartmentService, IDepartmentService>();
+              builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
 
             #endregion

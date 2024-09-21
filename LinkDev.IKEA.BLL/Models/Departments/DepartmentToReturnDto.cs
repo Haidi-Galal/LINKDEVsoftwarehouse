@@ -8,6 +8,7 @@ namespace LinkDev.IKEA.BLL.Models.Departments
 {
     public class DepartmentToReturnDto
     {
+        public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public int Code { get; set; }

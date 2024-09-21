@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.Entities.Department
 {
-    internal class Department:ModelBase
+    public class Department:ModelBase
     {
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public int Code { get; set; }
-        DateTime CreationDate { get; set; }
+        public  DateTime CreationDate { get; set; }
 
     }
 }

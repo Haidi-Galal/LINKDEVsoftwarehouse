@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.BLL.Models.Departments
 {
-    internal class DepartmentDetailsDto
+    public class DepartmentDetailsDto
     {
         public int Id { get; set; }
         public bool IsDeleted { get; set; }
@@ -18,6 +18,6 @@ namespace LinkDev.IKEA.BLL.Models.Departments
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public int Code { get; set; }
-        DateTime CreationDate { get; set; }
+       public DateTime CreationDate { get; set; }
     }
 }

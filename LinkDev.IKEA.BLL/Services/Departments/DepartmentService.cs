@@ -18,10 +18,10 @@ namespace LinkDev.IKEA.BLL.Services.Departments
         }
         public IEnumerable<DepartmentToReturnDto> GetDepartments()
         {
-            return _departmentRepoistory.GetAllDepartments().Select(D =>
-            new DepartmentToReturnDto 
+           var depts=  _departmentRepoistory.GetAllDepartments().Select(D =>
+             new DepartmentToReturnDto 
             
-            {
+            {   Id=D.Id,
                 Description=D.Description,
                 Name= D.Name,
                 Code=D.Code,
@@ -34,7 +34,7 @@ namespace LinkDev.IKEA.BLL.Services.Departments
 
 
             ).ToList();
-
+            return depts;
         }
         public DepartmentDetailsDto? GetDepartmentById(int id)
         {
