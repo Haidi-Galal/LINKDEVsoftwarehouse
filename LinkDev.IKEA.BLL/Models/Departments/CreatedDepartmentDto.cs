@@ -11,6 +11,6 @@ namespace LinkDev.IKEA.BLL.Models.Departments
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public int Code { get; set; }
-        DateTime CreationDate { get; set; }
+       public DateTime CreationDate { get; set; }
     }
 }

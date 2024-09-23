@@ -51,6 +51,7 @@ namespace LinkDev.IKEA.BLL.Services.Departments
                     IsDeleted = department.IsDeleted,
                     LastModifiedBy = 1,
                     LastModifiedOn = department.LastModifiedOn,
+                    CreationDate=department.CreationDate
 
 
                 };
@@ -67,7 +68,7 @@ namespace LinkDev.IKEA.BLL.Services.Departments
                 Code = department.Code,
 
                 CreatedBy = 1,
-                // CreatedOn = ,
+                CreationDate=department.CreationDate,
                 Description = department.Description,
                 Name = department.Name,
                 IsDeleted = false,
