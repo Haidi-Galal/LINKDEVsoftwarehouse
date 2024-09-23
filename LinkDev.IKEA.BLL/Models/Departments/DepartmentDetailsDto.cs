@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.IKEA.DAL.Entities
+namespace LinkDev.IKEA.BLL.Models.Departments
 {
-    public class ModelBase
+    public class DepartmentDetailsDto
     {
         public int Id { get; set; }
         public bool IsDeleted { get; set; }
@@ -15,5 +15,9 @@ namespace LinkDev.IKEA.DAL.Entities
 
         public DateTime CreatedOn { get; set; }
         public DateTime LastModifiedOn { get; set; }
+        public string Name { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public int Code { get; set; }
+       public DateTime CreationDate { get; set; }
     }
 }

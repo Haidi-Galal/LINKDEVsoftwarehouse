@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.IKEA.DAL.Entities.Department
+namespace LinkDev.IKEA.BLL.Models.Departments
 {
-    public class Department:ModelBase
+    public class CreatedDepartmentDto
     {
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public int Code { get; set; }
-        public  DateTime CreationDate { get; set; }
-
+       public DateTime CreationDate { get; set; }
     }
 }

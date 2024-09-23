@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model DepartmentDetailsDto
+@{
+    ViewData["Title"] = "Details";
+
+}
+<h1 class="text-center">Department Details</h1>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Administration</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">General</button>
+    </li>
+    
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <div class="form-group">
+            <label asp-for="CreatedOn"></label>
+            <input asp-for="CreatedOn" type="datetime" class="form-control" value="@Model.CreatedOn.ToString("yyyy-MM-dd")" readonly />
+        </div>
+        
+        <div class="form-group">
+            <label asp-for="LastModifiedOn"></label>
+            <input asp-for="LastModifiedOn" type="datetime" class="form-control" value="@Model.LastModifiedOn.ToString("yyyy-MM-dd")" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedBy"></label>
+            <input asp-for="CreatedBy" class="form-control" value="@Model.CreatedBy" readonly/>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastModifiedBy"></label>
+            <input asp-for="LastModifiedBy" class="form-control"  value="@Model.LastModifiedBy" readonly/>
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <div class="form-group">
+            <label asp-for="Code"></label>
+            <input asp-for="Code" class="form-control" readonly value="@Model.Code" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" readonly value="@Model.Name" />
+
+        </div>
+        <div class="form-group">
+            <label asp-for="CreationDate">CreationDate</label>
+            <input asp-for="CreationDate" class="form-control" type="date" readonly value="@Model.CreationDate.ToString("yyyy-MM-dd")" />
+        </div>
+
+
+      
+
+
+    </div>
+   
+</div>
