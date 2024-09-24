@@ -1,5 +1,6 @@
 ﻿using LinkDev.IKEA.BLL.Models.Departments;
 using LinkDev.IKEA.BLL.Services.Departments;
+using LinkDev.IKEA.PL.ViewModels.Deparments;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.IKEA.PL.Controllers
@@ -65,6 +66,94 @@ namespace LinkDev.IKEA.PL.Controllers
             if (dapartment is null)
                 return NotFound();
             return View(dapartment);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (id is null)
+                return BadRequest();
+           var department= _departmentService.GetDepartmentById(id.Value);
+            if (department is null)
+            {
+
+                return NotFound();
+            }
+            return View(new DepartmentEditViewModel() 
+            
+            {
+                Code=department.Code,
+                Name=department.Name,
+                CreationDate=department.CreationDate,
+                Description=department.Description
+            
+            
+            });
+
+         
+
+        }
+        [HttpPost]
+        public IActionResult Edit(int id,DepartmentEditViewModel department)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "error in updating !!");
+                Console.WriteLine(department.Code);
+                return View(department);
+                
+            }
+            else
+            {
+                var message = string.Empty;
+
+
+                try
+                {
+                   var updated= _departmentService.UpdateDepartment(new UpdatedDepartmentDto()
+                    {
+                        Code = department.Code,
+                        CreationDate = department.CreationDate,
+                        Id = id,
+                        Description = department.Description,
+                        Name = department.Name
+                    }
+                  )>0;
+                    if(updated)
+                    return RedirectToAction(nameof(Index));
+                    message = "an error occured during updating department";
+
+                }
+                catch(Exception ex)
+                {
+                    _logger.LogError(string.Empty, message);
+                    message = _webHostEnvironment.IsDevelopment() ? ex.Message : "an error occured during updating department";
+
+                }
+                ModelState.AddModelError(string.Empty,message);
+                return View(department);
+            }
+
+        }
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var message = string.Empty;
+            try
+            {
+                var deleted = _departmentService.DeleteDepartment(id);
+               
+
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(string.Empty, ex.Message);
+
+               message= _webHostEnvironment.IsDevelopment()?ex.Message:"an error occured in deleting";
+
+            }
+            return View(nameof(Index));
+
         }
 
     }

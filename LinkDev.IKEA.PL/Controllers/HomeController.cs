@@ -1,4 +1,5 @@
-using LinkDev.IKEA.PL.Models;
+using LinkDev.IKEA.PL.ViewModels;
+using LinkDev.IKEA.PL.ViewModels.common;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -28,5 +29,6 @@ namespace LinkDev.IKEA.PL.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        
     }
 }
