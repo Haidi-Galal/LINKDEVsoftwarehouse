@@ -75,8 +75,10 @@ namespace LinkDev.IKEA.PL.Controllers
                 return BadRequest();
            var department= _departmentService.GetDepartmentById(id.Value);
             if (department is null)
-                return NotFound();
+            {
 
+                return NotFound();
+            }
             return View(new DepartmentEditViewModel() 
             
             {
@@ -89,6 +91,68 @@ namespace LinkDev.IKEA.PL.Controllers
             });
 
          
+
+        }
+        [HttpPost]
+        public IActionResult Edit(int id,DepartmentEditViewModel department)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "error in updating !!");
+                Console.WriteLine(department.Code);
+                return View(department);
+                
+            }
+            else
+            {
+                var message = string.Empty;
+
+
+                try
+                {
+                   var updated= _departmentService.UpdateDepartment(new UpdatedDepartmentDto()
+                    {
+                        Code = department.Code,
+                        CreationDate = department.CreationDate,
+                        Id = id,
+                        Description = department.Description,
+                        Name = department.Name
+                    }
+                  )>0;
+                    if(updated)
+                    return RedirectToAction(nameof(Index));
+                    message = "an error occured during updating department";
+
+                }
+                catch(Exception ex)
+                {
+                    _logger.LogError(string.Empty, message);
+                    message = _webHostEnvironment.IsDevelopment() ? ex.Message : "an error occured during updating department";
+
+                }
+                ModelState.AddModelError(string.Empty,message);
+                return View(department);
+            }
+
+        }
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var message = string.Empty;
+            try
+            {
+                var deleted = _departmentService.DeleteDepartment(id);
+               
+
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(string.Empty, ex.Message);
+
+               message= _webHostEnvironment.IsDevelopment()?ex.Message:"an error occured in deleting";
+
+            }
+            return View(nameof(Index));
 
         }
 
