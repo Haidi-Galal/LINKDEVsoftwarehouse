@@ -1,5 +1,6 @@
 ﻿using LinkDev.IKEA.BLL.Models.Departments;
 using LinkDev.IKEA.BLL.Services.Departments;
+using LinkDev.IKEA.PL.ViewModels.Deparments;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.IKEA.PL.Controllers
@@ -65,6 +66,30 @@ namespace LinkDev.IKEA.PL.Controllers
             if (dapartment is null)
                 return NotFound();
             return View(dapartment);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (id is null)
+                return BadRequest();
+           var department= _departmentService.GetDepartmentById(id.Value);
+            if (department is null)
+                return NotFound();
+
+            return View(new DepartmentEditViewModel() 
+            
+            {
+                Code=department.Code,
+                Name=department.Name,
+                CreationDate=department.CreationDate,
+                Description=department.Description
+            
+            
+            });
+
+         
+
         }
 
     }
