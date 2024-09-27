@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LinkDev.IKEA.DAL.Entities.common;
 
 namespace LinkDev.IKEA.DAL.Entities.Department
 {

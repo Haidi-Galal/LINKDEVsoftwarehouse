@@ -42,7 +42,7 @@ namespace LinkDev.IKEA.DAL.persistance.Repoistories
 
         public int DeleteDepartment(Department entity)
         {
-            _dbContext.Department.Update(entity);
+            _dbContext.Department.Remove(entity);
             return _dbContext.SaveChanges();
         }
 

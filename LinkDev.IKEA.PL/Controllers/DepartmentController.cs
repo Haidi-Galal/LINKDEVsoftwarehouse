@@ -142,17 +142,21 @@ namespace LinkDev.IKEA.PL.Controllers
             try
             {
                 var deleted = _departmentService.DeleteDepartment(id);
-               
+                if(deleted)
+                return RedirectToAction(nameof(Index));
+
+                message = "an error occured in deleting !";
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(string.Empty, ex.Message);
 
                message= _webHostEnvironment.IsDevelopment()?ex.Message:"an error occured in deleting";
 
             }
-            return View(nameof(Index));
+
+            return RedirectToAction(nameof(Index));
 
         }
 
