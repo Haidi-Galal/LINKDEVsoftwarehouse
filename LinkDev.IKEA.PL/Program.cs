@@ -1,6 +1,6 @@
 using LinkDev.IKEA.BLL.Services.Departments;
 using LinkDev.IKEA.DAL.persistance.Data;
-using LinkDev.IKEA.DAL.persistance.Repoistories;
+using LinkDev.IKEA.DAL.persistance.Repoistories.Department;
 using Microsoft.EntityFrameworkCore;
 
 namespace LinkDev.IKEA.PL

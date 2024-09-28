@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LinkDev.IKEA.DAL.persistance.Repoistories;
 using LinkDev.IKEA.DAL.Entities.Department;
+using LinkDev.IKEA.DAL.persistance.Repoistories.Departments;
 
 namespace LinkDev.IKEA.BLL.Services.Departments
 {
@@ -18,7 +18,7 @@ namespace LinkDev.IKEA.BLL.Services.Departments
         }
         public IEnumerable<DepartmentToReturnDto> GetDepartments()
         {
-           var depts=  _departmentRepoistory.GetAllDepartments().Select(D =>
+           var depts=  _departmentRepoistory.GetAllIQuerable().Select(D =>
              new DepartmentToReturnDto 
             
             {   Id=D.Id,
@@ -38,7 +38,7 @@ namespace LinkDev.IKEA.BLL.Services.Departments
         }
         public DepartmentDetailsDto? GetDepartmentById(int id)
         {
-           var department= _departmentRepoistory.GetDepartmentById(id);
+           var department= _departmentRepoistory.GetById(id);
             if (department is not null)
                 return new DepartmentDetailsDto
                 {
@@ -76,7 +76,7 @@ namespace LinkDev.IKEA.BLL.Services.Departments
                 LastModifiedOn = DateTime.Now,
 
             };
-           return  _departmentRepoistory.AddDepartment(createddepartment);
+           return  _departmentRepoistory.Add(createddepartment);
         }
         public int UpdateDepartment(UpdatedDepartmentDto departmentDto)
         {
@@ -93,13 +93,13 @@ namespace LinkDev.IKEA.BLL.Services.Departments
                 LastModifiedOn = DateTime.Now,
 
             };
-            return _departmentRepoistory.UpdateDepartment(updateddepartment);
+            return _departmentRepoistory.Update(updateddepartment);
         }
         public bool DeleteDepartment(int id)
         {
-           var department= _departmentRepoistory.GetDepartmentById(id);
+           var department= _departmentRepoistory.GetById(id);
             if (department is not null)
-            return _departmentRepoistory.DeleteDepartment(department) > 0;
+            return _departmentRepoistory.Delete(department) > 0;
 
             return false;
            
