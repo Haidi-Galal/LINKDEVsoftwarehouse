@@ -13,7 +13,7 @@ namespace LinkDev.IKEA.DAL.persistance.Repoistories._Generic
         public  IQueryable<T> GetAllIQuerable();
         public IEnumerable<T> GetAll();
 
-        public T? GetById(T entity);
+        public T? GetById(int id);
         public int Add(T entity);
         public int Update(T entity);
         public int Delete(T entity);

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.persistance.Repoistories._Generic
 {
-    internal class GenericRepoistory <T> where T : ModelBase
+    public class GenericRepoistory <T> where T : ModelBase
     {
         private protected readonly ApplicationDbContext _dbContext;
         public GenericRepoistory(ApplicationDbContext dbContext)

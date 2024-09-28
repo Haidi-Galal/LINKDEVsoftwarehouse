@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.persistance.Repoistories.Employees
 {
-    internal interface IEmployeeRepoistory:IGenericRepoistory<Employee>
+    public interface IEmployeeRepoistory:IGenericRepoistory<Employee>
     {
     }
 }

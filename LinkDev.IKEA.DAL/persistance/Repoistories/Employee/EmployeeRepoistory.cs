@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.persistance.Repoistories.Employees
 {
-    internal class EmployeeRepoistory :GenericRepoistory<Employee> ,IEmployeeRepoistory
+    public class EmployeeRepoistory :GenericRepoistory<Employee> ,IEmployeeRepoistory
     {
         public EmployeeRepoistory(ApplicationDbContext dbContext):base(dbContext)
         {
