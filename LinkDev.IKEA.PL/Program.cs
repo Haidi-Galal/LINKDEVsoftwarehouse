@@ -3,6 +3,7 @@ using LinkDev.IKEA.BLL.Services.Employees;
 using LinkDev.IKEA.DAL.persistance.Data;
 using LinkDev.IKEA.DAL.persistance.Repoistories.Departments;
 using LinkDev.IKEA.DAL.persistance.Repoistories.Employees;
+using LinkDev.IKEA.DAL.persistance.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace LinkDev.IKEA.PL
@@ -40,7 +41,7 @@ namespace LinkDev.IKEA.PL
 
             builder.Services.AddScoped<IEmployeeRepoistory, EmployeeRepoistory>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             #endregion
             var app = builder.Build();

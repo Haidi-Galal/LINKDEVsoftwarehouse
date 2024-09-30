@@ -1,6 +1,7 @@
 ﻿using LinkDev.IKEA.BLL.Models.Employees;
 using LinkDev.IKEA.DAL.Entities.Employee;
 using LinkDev.IKEA.DAL.persistance.Repoistories.Employees;
+using LinkDev.IKEA.DAL.persistance.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,10 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly IEmployeeRepoistory _employeeRepoistory;
-        public EmployeeService(IEmployeeRepoistory employeeRepoistory)
+        private readonly UnitOfWork _unitOfWork;
+        public EmployeeService(UnitOfWork unitOfWork)
         {
-            _employeeRepoistory = employeeRepoistory;
+            _unitOfWork = unitOfWork;
             
         }
         public int CreateEmployee(CreateEmployeeDto employeeDto)
@@ -40,24 +41,27 @@ namespace LinkDev.IKEA.BLL.Services.Employees
             };
 
 
-           return _employeeRepoistory.Add(employee);
-           
+            _unitOfWork.EmplpyeeRepoistory.
+                Add(employee);
+            return _unitOfWork.Complete();
+
+
         }
 
         public bool DeleteEmployee(int id)
         {
-            var employee = _employeeRepoistory.GetById(id);
+            var employee = _unitOfWork.EmplpyeeRepoistory.GetById(id);
             if (employee is { })
-                return _employeeRepoistory.Delete(employee) > 0;
+             _unitOfWork.EmplpyeeRepoistory.Delete(employee) ;
 
 
-        return false;
+        return _unitOfWork.Complete()> 0;
 
         }
 
         public EmployeeDetailsDto? GetEmployeeById(int id)
         {
-            var employee= _employeeRepoistory.GetById(id);
+            var employee= _unitOfWork.EmplpyeeRepoistory.GetById(id);
             if (employee is { })
 
                 return new EmployeeDetailsDto() 
@@ -88,7 +92,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 
         public IEnumerable<EmployeeDto> GetEmployees()
         {
-           return  _employeeRepoistory.GetAllIQuerable().Select
+           return _unitOfWork.EmplpyeeRepoistory.GetAllIQuerable().Select
                  (E => new EmployeeDto()
                  {
                      EmailAddress=E.EmailAddress,
@@ -106,7 +110,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 
         public int UpdateEmployee(UpdatedEmployeeDto employeeDto)
         {
-           return _employeeRepoistory.Update(new Employee()
+            _unitOfWork.EmplpyeeRepoistory.Update(new Employee()
             {
                 Id = employeeDto.Id,
                 Address = employeeDto.Address,
@@ -130,6 +134,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 
 
             });
+            return _unitOfWork.Complete();
 
         }
     }

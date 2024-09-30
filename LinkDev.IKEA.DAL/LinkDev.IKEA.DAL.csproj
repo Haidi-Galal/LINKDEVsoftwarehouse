@@ -1,22 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+               <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <TargetFramework>net8.0</TargetFramework> <!-- Specify your target framework here -->
+    <Nullable>enable</Nullable> <!-- Enable nullability checks (optional) -->
+    <ImplicitUsings>enable</ImplicitUsings> <!-- Add implicit global usings (optional) -->
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="persistance\Data\Migrations\" />
-    <Folder Include="persistance\Data\DataSeeding\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
 </Project>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
