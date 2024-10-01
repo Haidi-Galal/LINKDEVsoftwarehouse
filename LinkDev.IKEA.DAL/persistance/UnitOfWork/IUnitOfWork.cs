@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.persistance.UnitOfWork
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IAsyncDisposable
     {
         public IDepartmentRepoistory DepartmentRepoistory { get;  }
         public IEmployeeRepoistory EmplpyeeRepoistory { get; }
 
-        public int Complete();
-        public void Dispose();
+        public  Task<int> CompleteAsync();
+        public ValueTask DisposeAsync();
         
     }
 }

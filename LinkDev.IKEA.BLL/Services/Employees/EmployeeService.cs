@@ -2,6 +2,7 @@
 using LinkDev.IKEA.DAL.Entities.Employee;
 using LinkDev.IKEA.DAL.persistance.Repoistories.Employees;
 using LinkDev.IKEA.DAL.persistance.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
             _unitOfWork = unitOfWork;
             
         }
-        public int CreateEmployee(CreateEmployeeDto employeeDto)
+        public async Task<int> CreateEmployeeAsync(CreateEmployeeDto employeeDto)
         {
             var employee = new Employee() 
             {  Salary= employeeDto.Salary,
@@ -43,25 +44,25 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 
             _unitOfWork.EmplpyeeRepoistory.
                 Add(employee);
-            return _unitOfWork.Complete();
+            return await  _unitOfWork.CompleteAsync();
 
 
         }
 
-        public bool DeleteEmployee(int id)
+        public async Task<bool> DeleteEmployeeAsync(int id)
         {
-            var employee = _unitOfWork.EmplpyeeRepoistory.GetById(id);
+            var employee = await _unitOfWork.EmplpyeeRepoistory.GetByIdAsync(id);
             if (employee is { })
              _unitOfWork.EmplpyeeRepoistory.Delete(employee) ;
 
 
-        return _unitOfWork.Complete()> 0;
+        return await _unitOfWork.CompleteAsync()> 0;
 
         }
 
-        public EmployeeDetailsDto? GetEmployeeById(int id)
+        public async  Task<EmployeeDetailsDto?> GetEmployeeByIdAsync(int id)
         {
-            var employee= _unitOfWork.EmplpyeeRepoistory.GetById(id);
+            var employee= await _unitOfWork.EmplpyeeRepoistory.GetByIdAsync(id);
             if (employee is { })
 
                 return new EmployeeDetailsDto() 
@@ -90,9 +91,9 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 
         }
 
-        public IEnumerable<EmployeeDto> GetEmployees()
+        public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync()
         {
-           return _unitOfWork.EmplpyeeRepoistory.GetAllIQuerable().Select
+           return await _unitOfWork.EmplpyeeRepoistory.GetAllIQuerable().Select
                  (E => new EmployeeDto()
                  {
                      EmailAddress=E.EmailAddress,
@@ -105,10 +106,10 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                    
                      
 
-                 }).ToList();
+                 }).ToListAsync();
         }
 
-        public int UpdateEmployee(UpdatedEmployeeDto employeeDto)
+        public async Task<int> UpdateEmployeeAsync(UpdatedEmployeeDto employeeDto)
         {
             _unitOfWork.EmplpyeeRepoistory.Update(new Employee()
             {
@@ -134,7 +135,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 
 
             });
-            return _unitOfWork.Complete();
+            return await _unitOfWork.CompleteAsync();
 
         }
     }

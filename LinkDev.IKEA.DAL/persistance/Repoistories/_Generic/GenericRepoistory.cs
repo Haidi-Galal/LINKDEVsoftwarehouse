@@ -1,6 +1,7 @@
 ﻿using LinkDev.IKEA.DAL.Entities.common;
 using LinkDev.IKEA.DAL.Entities.Department;
 using LinkDev.IKEA.DAL.persistance.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +17,17 @@ namespace LinkDev.IKEA.DAL.persistance.Repoistories._Generic
         {
             _dbContext = dbContext;
         }
-        public IEnumerable<T> GetAll()
+        public async Task< IEnumerable<T>> GetAllAsync()
         {
-            return _dbContext.Set<T>().ToList();
+            return  await _dbContext.Set<T>().ToListAsync();
         }
         public IQueryable<T> GetAllIQuerable()
         {
             return _dbContext.Set<T>();
         }
-        public T? GetById(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
-            return _dbContext.Set<T>().Find(id);
+            return await _dbContext.Set<T>().FindAsync(id);
         }
         public void Add(T entity)
         {

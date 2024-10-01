@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using LinkDev.IKEA.DAL.Entities.Department;
 using LinkDev.IKEA.DAL.persistance.Repoistories.Departments;
 using LinkDev.IKEA.DAL.persistance.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace LinkDev.IKEA.BLL.Services.Departments
 {
@@ -17,9 +18,9 @@ namespace LinkDev.IKEA.BLL.Services.Departments
         {
             _unitOfWork = unitOfWork;
         }
-        public IEnumerable<DepartmentToReturnDto> GetDepartments()
+        public  async Task<IEnumerable<DepartmentToReturnDto>> GetDepartmentsAsync()
         {
-           var depts=  _unitOfWork.DepartmentRepoistory.GetAllIQuerable().Select(D =>
+           var depts= await  _unitOfWork.DepartmentRepoistory.GetAllIQuerable().Select(D =>
              new DepartmentToReturnDto 
             
             {   Id=D.Id,
@@ -34,12 +35,12 @@ namespace LinkDev.IKEA.BLL.Services.Departments
 
 
 
-            ).ToList();
+            ).ToListAsync();
             return depts;
         }
-        public DepartmentDetailsDto? GetDepartmentById(int id)
+        public async Task< DepartmentDetailsDto?> GetDepartmentByIdAsync(int id)
         {
-           var department= _unitOfWork.DepartmentRepoistory.GetById(id);
+           var department= await _unitOfWork.DepartmentRepoistory.GetByIdAsync(id);
             if (department is not null)
                 return new DepartmentDetailsDto
                 {
@@ -62,7 +63,7 @@ namespace LinkDev.IKEA.BLL.Services.Departments
 
 
         }
-        public int CreateDepartment(CreatedDepartmentDto department)
+        public async Task< int> CreateDepartmentAsync(CreatedDepartmentDto department)
         {
             var createddepartment = new Department()
             {
@@ -79,9 +80,9 @@ namespace LinkDev.IKEA.BLL.Services.Departments
             };
             _unitOfWork.DepartmentRepoistory.Add(createddepartment);
 
-            return _unitOfWork.Complete();
+            return await  _unitOfWork.CompleteAsync();
         }
-        public int UpdateDepartment(UpdatedDepartmentDto departmentDto)
+        public async   Task<int> UpdateDepartmentAsync(UpdatedDepartmentDto departmentDto)
         {
             var updateddepartment = new Department()
             {
@@ -97,15 +98,15 @@ namespace LinkDev.IKEA.BLL.Services.Departments
 
             };
             _unitOfWork.DepartmentRepoistory.Update(updateddepartment);
-            return _unitOfWork.Complete();
+            return await _unitOfWork.CompleteAsync();
         }
-        public bool DeleteDepartment(int id)
+        public async Task<bool> DeleteDepartmentAsync(int id)
         {
             var repo = _unitOfWork.DepartmentRepoistory;
-           var department= repo.GetById(id);
+           var department=await  repo.GetByIdAsync(id);
             if (department is not null)
              repo.Delete(department) ;
-            return _unitOfWork.Complete()>0;
+            return await _unitOfWork.CompleteAsync()>0;
            
         }
 

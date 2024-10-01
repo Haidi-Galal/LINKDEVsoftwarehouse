@@ -19,7 +19,7 @@ namespace LinkDev.IKEA.PL.Controllers
         [HttpGet] //Department/Index
         public IActionResult Index()
         {
-           var departments= _departmentService.GetDepartments();
+           var departments= _departmentService.GetDepartmentsAsync();
             return View(departments);
         }
         [HttpGet]
@@ -28,12 +28,12 @@ namespace LinkDev.IKEA.PL.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(CreatedDepartmentDto createddepartmentdto)
+        public async  Task<IActionResult> Create(CreatedDepartmentDto createddepartmentdto)
         {   if (!ModelState.IsValid)
                 return View(createddepartmentdto);
             try
             {
-                var result = _departmentService.CreateDepartment(createddepartmentdto) > 0;
+                var result = await _departmentService.CreateDepartmentAsync(createddepartmentdto) > 0;
                 if (result)
                     return RedirectToAction(nameof(Index));
 
@@ -59,21 +59,21 @@ namespace LinkDev.IKEA.PL.Controllers
         }
         
         [HttpGet]
-        public IActionResult Details(int? id)
+        public async Task< IActionResult> Details(int? id)
         {     if (id is null)
                 return BadRequest();
-           var dapartment= _departmentService.GetDepartmentById(id.Value);
+           var dapartment= await _departmentService.GetDepartmentByIdAsync(id.Value);
             if (dapartment is null)
                 return NotFound();
             return View(dapartment);
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public async Task< IActionResult> Edit(int? id)
         {
             if (id is null)
                 return BadRequest();
-           var department= _departmentService.GetDepartmentById(id.Value);
+           var department= await _departmentService.GetDepartmentByIdAsync(id.Value);
             if (department is null)
             {
 
@@ -94,7 +94,7 @@ namespace LinkDev.IKEA.PL.Controllers
 
         }
         [HttpPost]
-        public IActionResult Edit(int id,DepartmentEditViewModel department)
+        public async  Task<IActionResult> Edit(int id,DepartmentEditViewModel department)
         {
             if (!ModelState.IsValid)
             {
@@ -110,7 +110,7 @@ namespace LinkDev.IKEA.PL.Controllers
 
                 try
                 {
-                   var updated= _departmentService.UpdateDepartment(new UpdatedDepartmentDto()
+                   var updated=  await _departmentService.UpdateDepartmentAsync(new UpdatedDepartmentDto()
                     {
                         Code = department.Code,
                         CreationDate = department.CreationDate,
@@ -136,12 +136,12 @@ namespace LinkDev.IKEA.PL.Controllers
 
         }
         [HttpPost]
-        public IActionResult Delete(int id)
+        public async  Task<IActionResult> Delete(int id)
         {
             var message = string.Empty;
             try
             {
-                var deleted = _departmentService.DeleteDepartment(id);
+                var deleted = await _departmentService.DeleteDepartmentAsync(id);
                 if(deleted)
                 return RedirectToAction(nameof(Index));
 
