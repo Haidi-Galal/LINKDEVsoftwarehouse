@@ -57,6 +57,18 @@ namespace LinkDev.IKEA.PL
 
                   }
                 ).AddEntityFrameworkStores < ApplicationDbContext>(); //Register Stores (Repos)
+
+            builder.Services.ConfigureApplicationCookie
+                (
+                (options) =>
+                {
+                    options.LoginPath = "/Account/SignIn";
+                    options.AccessDeniedPath = "/Home/error";
+                    options.LogoutPath = "/Account/SignIn";
+
+				}
+
+                );
             #endregion
             var app = builder.Build();
             
@@ -75,9 +87,9 @@ namespace LinkDev.IKEA.PL
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
