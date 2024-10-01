@@ -1,5 +1,6 @@
 ﻿using LinkDev.IKEA.DAL.Entities.Department;
 using LinkDev.IKEA.DAL.Entities.Employee;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.persistance.Data
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions <ApplicationDbContext> options) :base(options)
         {
@@ -23,6 +24,8 @@ namespace LinkDev.IKEA.DAL.persistance.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         {
+            //configure 7-dbsets
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         }

@@ -36,12 +36,12 @@ namespace LinkDev.IKEA.PL
 
                 );
 
-              builder.Services.AddScoped<IDepartmentRepoistory, DepartmentRepoistory>();
+            builder.Services.AddScoped<IDepartmentRepoistory, DepartmentRepoistory>();
               builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddScoped<IEmployeeRepoistory, EmployeeRepoistory>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             #endregion
             var app = builder.Build();

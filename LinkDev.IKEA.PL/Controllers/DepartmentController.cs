@@ -17,9 +17,9 @@ namespace LinkDev.IKEA.PL.Controllers
         }
 
         [HttpGet] //Department/Index
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-           var departments= _departmentService.GetDepartmentsAsync();
+           var departments= await _departmentService.GetDepartmentsAsync();
             return View(departments);
         }
         [HttpGet]

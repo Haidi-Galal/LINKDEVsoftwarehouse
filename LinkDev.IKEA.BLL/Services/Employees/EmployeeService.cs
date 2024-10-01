@@ -13,8 +13,8 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly UnitOfWork _unitOfWork;
-        public EmployeeService(UnitOfWork unitOfWork)
+        private readonly IUnitOfWork _unitOfWork;
+        public EmployeeService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             
