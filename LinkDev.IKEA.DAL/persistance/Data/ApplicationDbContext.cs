@@ -1,5 +1,6 @@
 ﻿using LinkDev.IKEA.DAL.Entities.Department;
 using LinkDev.IKEA.DAL.Entities.Employee;
+using LinkDev.IKEA.DAL.Entities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.persistance.Data
 {
-    public class ApplicationDbContext:IdentityDbContext
+    public class ApplicationDbContext:IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions <ApplicationDbContext> options) :base(options)
         {

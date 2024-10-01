@@ -1,9 +1,11 @@
 using LinkDev.IKEA.BLL.Services.Departments;
 using LinkDev.IKEA.BLL.Services.Employees;
+using LinkDev.IKEA.DAL.Entities.Identity;
 using LinkDev.IKEA.DAL.persistance.Data;
 using LinkDev.IKEA.DAL.persistance.Repoistories.Departments;
 using LinkDev.IKEA.DAL.persistance.Repoistories.Employees;
 using LinkDev.IKEA.DAL.persistance.UnitOfWork;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace LinkDev.IKEA.PL
@@ -42,7 +44,19 @@ namespace LinkDev.IKEA.PL
 
             builder.Services.AddScoped<IEmployeeRepoistory, EmployeeRepoistory>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>
+                (
+                  (options) =>
+                  {
+                      options.Password.RequiredLength = 5;
+                      options.Password.RequireUppercase = true;
+                      options.User.RequireUniqueEmail = true;
+                      options.Lockout.AllowedForNewUsers = true;
+                      options.Lockout.MaxFailedAccessAttempts = 4;
+                      options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(5);
 
+                  }
+                ).AddEntityFrameworkStores < ApplicationDbContext>(); //Register Stores (Repos)
             #endregion
             var app = builder.Build();
             
